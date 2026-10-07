@@ -133,7 +133,62 @@ Spør programmet om kalibreringsfil, trykk **ENTER** for å bruke fila i repoet.
 
 ---
 
-## 5. Kalibrering (bare ved behov)
+## 5. Opptak av data
+
+Test alltid teleoperasjon først. Kjør så fra rota av dette repoet.
+
+### Lagre lokalt (anbefalt mens dere tester)
+
+```bash
+STATION=s1 HF_USER=<ditt-hf-brukernavn> DATASET=so101_pick_cube TASK="Pick up the cube and place it in the box" \
+  FOLLOWER_PORT=COM5 LEADER_PORT=COM6 CAM_FRONT=0 CAM_WRIST=1 \
+  EPISODES=3 EPISODE_S=20 RESET_S=10 PUSH=false bash scripts/record.sh
+```
+
+`PUSH=false` gjør at ingenting lastes opp. Datasettet lagres på din egen PC her:
+
+```
+~/.cache/huggingface/lerobot/<HF_USER>/<DATASET>_<STATION>/
+```
+
+Selv om du ikke laster opp, trenger LeRobot et navn på formen `bruker/navn`, derfor må `HF_USER` settes. Skriptet legger på stasjonen selv (`_s1` eller `_s2`).
+
+### Variabler
+
+| Variabel | Påkrevd | Betydning | Standard |
+|---|---|---|---|
+| `STATION` | Ja | `s1` = IKKE ved vinduene, `s2` = ved vinduene | – |
+| `HF_USER` | Ja | Hugging Face-bruker eller organisasjon | – |
+| `DATASET` | Ja | Navn på datasettet, f.eks. `so101_pick_cube` | – |
+| `TASK` | Ja | Beskrivelse av oppgaven. Bruk **nøyaktig samme tekst** for samme oppgave | – |
+| `FOLLOWER_PORT` / `LEADER_PORT` | Nei | Portene fra `lerobot-find-port` | `COM3` / `COM4` |
+| `CAM_FRONT` / `CAM_WRIST` | Nei | Kameraindekser fra `lerobot-find-cameras` | `0` / `2` |
+| `EPISODES` | Nei | Antall episoder | `10` |
+| `EPISODE_S` | Nei | Sekunder per episode | `30` |
+| `RESET_S` | Nei | Sekunder til å sette ting tilbake mellom episodene | `10` |
+| `PUSH` | Nei | `true` = last opp til Hugging Face, `false` = bare lokalt | `true` |
+| `RESUME` | Nei | `true` = fortsett på et eksisterende datasett | `false` |
+
+### Tastatur under opptak
+
+| Tast | Handling |
+|---|---|
+| **Høyre pil** | Episoden er ferdig, gå videre til neste |
+| **Venstre pil** | Noe gikk galt, ta episoden opp på nytt |
+| **Esc** | Stopp opptaket. Alt som er tatt opp så langt lagres |
+
+### Sjekk og se på opptaket
+
+```bash
+ls -R ~/.cache/huggingface/lerobot/<HF_USER>/<DATASET>_<STATION> | head -40
+lerobot-dataset-viz --repo-id <HF_USER>/<DATASET>_<STATION> --episode-index 0
+```
+
+Du skal se mappene `data/`, `meta/` og `videos/`.
+
+---
+
+## 6. Kalibrering (bare ved behov)
 
 Kalibrer på nytt bare hvis en motor er byttet, et horn er skrudd av, eller armen oppfører seg feil.
 
