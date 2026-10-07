@@ -8,14 +8,20 @@ Koden for LeRobot ligger i forken [LabReLUPhysucalHF](https://github.com/lars-ol
 
 ## Stasjoner
 
-| Stasjon | Plassering | Follower-id | Leader-id | Kameraer |
-|---|---|---|---|---|
-| **Stasjon 1** (`s1`) | Ved vinduene | `follower_s1` | `leader_s1` | `front` (bord) + `wrist` (håndledd) |
-| **Stasjon 2** (`s2`) | _fyll inn_ | `follower_s2` | `leader_s2` | `front` (bord) + `wrist` (håndledd) |
+> # 🚨 VELDIG VIKTIG: SJEKK HVILKEN STASJON DU STÅR VED
+>
+> | Stasjon | Plassering | Follower-id | Leader-id |
+> |---|---|---|---|
+> | **Stasjon 1** (`s1`) | **IKKE ved vinduene** | `follower_s1` | `leader_s1` |
+> | **Stasjon 2** (`s2`) | **Ved vinduene** | `follower_s2` | `leader_s2` |
+>
+> **Står du ved vinduene → bruk `s2`. Står du ikke ved vinduene → bruk `s1`.**
+>
+> Hver arm har sin **egen** kalibreringsfil. Bruker du feil stasjon, laster du inn kalibreringen til en annen arm. Da går follower-armen til feil posisjoner og kan kjøre inn i endestoppene og skade motorene.
 
-> ⚠️ **Hver arm har sin egen kalibreringsfil.** Bruk alltid id-en til stasjonen du står ved. Feil kalibrering får follower-armen til å gå til feil posisjoner og kan kjøre den inn i endestopp.
+Begge stasjonene har to kameraer: `front` (bord) og `wrist` (håndledd).
 
-Armene er merket fysisk med id-en sin. Bytt aldri armer mellom stasjoner uten å kalibrere på nytt.
+Armene skal være merket fysisk med id-en sin. Bytt aldri armer mellom stasjoner uten å kalibrere på nytt.
 
 ---
 
