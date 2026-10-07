@@ -140,7 +140,7 @@ Test alltid teleoperasjon først. Kjør så fra rota av dette repoet.
 ### Lagre lokalt (anbefalt mens dere tester)
 
 ```bash
-STATION=s1 HF_USER=<ditt-hf-brukernavn> DATASET=so101_pick_cube TASK="Pick up the cube and place it in the box" \
+STATION=s1 HF_USER=relu DATASET=so101_pick_cube TASK="Pick up the cube and place it in the box" \
   FOLLOWER_PORT=COM5 LEADER_PORT=COM6 CAM_FRONT=0 CAM_WRIST=1 \
   EPISODES=3 EPISODE_S=20 RESET_S=10 PUSH=false bash scripts/record.sh
 ```
@@ -151,14 +151,16 @@ STATION=s1 HF_USER=<ditt-hf-brukernavn> DATASET=so101_pick_cube TASK="Pick up th
 ~/.cache/huggingface/lerobot/<HF_USER>/<DATASET>_<STATION>/
 ```
 
-Selv om du ikke laster opp, trenger LeRobot et navn på formen `bruker/navn`, derfor må `HF_USER` settes. Skriptet legger på stasjonen selv (`_s1` eller `_s2`).
+Når du lagrer lokalt, trenger du **ikke** Hugging Face-konto eller innlogging. `HF_USER` er da bare et mappenavn, men LeRobot krever et navn på formen `noe/noe`. Bruk alltid `relu` når du lagrer lokalt, så havner alles datasett på samme sted. Skriptet legger på stasjonen selv (`_s1` eller `_s2`).
+
+Skal du laste opp (`PUSH=true`), må `HF_USER` være en ekte Hugging Face-bruker eller -organisasjon du har skrivetilgang til, og du må være logget inn med `hf auth login`.
 
 ### Variabler
 
 | Variabel | Påkrevd | Betydning | Standard |
 |---|---|---|---|
 | `STATION` | Ja | `s1` = IKKE ved vinduene, `s2` = ved vinduene | – |
-| `HF_USER` | Ja | Hugging Face-bruker eller organisasjon | – |
+| `HF_USER` | Ja | `relu` når du lagrer lokalt. Ved opplasting: Hugging Face-bruker eller organisasjon | – |
 | `DATASET` | Ja | Navn på datasettet, f.eks. `so101_pick_cube` | – |
 | `TASK` | Ja | Beskrivelse av oppgaven. Bruk **nøyaktig samme tekst** for samme oppgave | – |
 | `FOLLOWER_PORT` / `LEADER_PORT` | Nei | Portene fra `lerobot-find-port` | `COM3` / `COM4` |
@@ -213,7 +215,7 @@ git add calibration && git commit -m "Rekalibrert leader_s1" && git push
 
 ---
 
-## 6. Feilsøking
+## 7. Feilsøking
 
 > 💡 **Svarer ikke motorene?** Ta ut strømkabelen til armen, vent **5 sekunder** og sett den i igjen. Da startes alle motorene på nytt, og det løser ofte problemet. Prøv dette først før du feilsøker videre.
 
