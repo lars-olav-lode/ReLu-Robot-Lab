@@ -36,9 +36,7 @@ ReLu-Robot-Lab/
 │   └── teleoperators/so101_leader/   # leader_s1.json, leader_s2.json
 └── scripts/
     ├── teleop.sh          # teleoperasjon med kameraer
-    ├── record.sh          # opptak av datasett
-    ├── reset_leader.py    # nullstiller homing offsets på leader
-    └── check_m5.py        # feilsøking av motor 5 (wrist_roll)
+    └── record.sh          # opptak av datasett
 ```
 
 ---
@@ -163,7 +161,8 @@ git add calibration && git commit -m "Rekalibrert leader_s1" && git push
 |---|---|---|
 | `command not found` med rare tegn (`$'\302\203...`) | Skjult tegn fra kopiering | Trykk `Ctrl+U`, skriv kommandonavnet for hånd |
 | `Missing motor IDs: 5` | Motoren svarer ikke | Sjekk kablene ved motoren. Hjelper ikke det: `lerobot-setup-motors` og koble én motor om gangen |
-| `Magnitude ... exceeds 2047` under kalibrering | Et ledd står ved encoderens nullpunkt | Kjør `scripts/reset_leader.py`, vri leddet ca. en halv runde og kalibrer igjen |
+| `Magnitude ... exceeds 2047` under kalibrering | Et ledd står ved encoderens nullpunkt (ofte wrist_roll) | Vri leddet ca. en halv runde før du trykker ENTER i midtposisjon. Hjelper ikke det: kontakt infra-ansvarlig |
+| `Missing motor IDs` for **alle** motorene | Armen har ikke strøm, eller feil port | Sjekk strømadapteren og kjør `lerobot-find-port` |
 | `Mismatch between calibration values in the motor and the calibration file` | Feil id eller ny motor | Sjekk at id-en stemmer med stasjonen. Ellers kalibrer |
 | Ingen COM-port / `ttyACM` | Driver eller strøm mangler | Se seksjon 2 |
 | Kamera feiler ved oppstart | Feil indeks eller oppløsning, eller kameraet er i bruk | Kjør `lerobot-find-cameras opencv` på nytt |
