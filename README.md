@@ -58,12 +58,15 @@ cd ReLu-Robot-Lab
 conda env create -f environment.yml
 conda activate lerobot
 
-# 3. Installer LeRobot
+# 3. Installer LeRobot (låst versjon, se under)
 cd ../lerobot
+git checkout ca69a2068462a37f7cdcb74180927a2f863d2bf7
 pip install -e ".[feetech,viz]"   # feetech = motorene, viz = Rerun-visning
 ```
 
-> **Intel-Mac:** det har vært versjonskonflikt med `torchvision`. Si fra i Slack hvis du får installasjonsfeil.
+> **Låste versjoner:** Python 3.12 og ffmpeg 7.1.1 (i `environment.yml`) og LeRobot på commit `ca69a20`. Ikke bruk nyeste `main` fra LeRobot. Nye versjoner kan endre kalibreringsformatet og kommandoene. Oppgraderinger gjøres samlet av infra-ansvarlig, etter test på begge stasjonene.
+
+> ⚠️ **Intel-Mac (fra før 2020) støttes ikke.** PyTorch lager ikke lenger nye versjoner for Intel-Mac, så installasjonen feiler med versjonskonflikt på `torch`/`torchvision`. Bruk en Windows-PC, Linux-PC eller Mac med Apple-chip (M1–M4).
 
 ---
 
