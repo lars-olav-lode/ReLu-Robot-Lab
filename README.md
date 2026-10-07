@@ -160,12 +160,14 @@ git add calibration && git commit -m "Rekalibrert leader_s1" && git push
 
 ## 6. Feilsøking
 
+> 💡 **Svarer ikke motorene?** Ta ut strømkabelen til armen, vent **5 sekunder** og sett den i igjen. Da startes alle motorene på nytt, og det løser ofte problemet. Prøv dette først før du feilsøker videre.
+
 | Feilmelding | Årsak | Løsning |
 |---|---|---|
 | `command not found` med rare tegn (`$'\302\203...`) | Skjult tegn fra kopiering | Trykk `Ctrl+U`, skriv kommandonavnet for hånd |
-| `Missing motor IDs: 5` | Motoren svarer ikke | Sjekk kablene ved motoren. Hjelper ikke det: `lerobot-setup-motors` og koble én motor om gangen |
+| `Missing motor IDs: 5` | Motoren svarer ikke | Ta ut strømmen i 5 sekunder. Sjekk så kablene ved motoren. Hjelper ikke det: `lerobot-setup-motors` og koble én motor om gangen |
 | `Magnitude ... exceeds 2047` under kalibrering | Et ledd står ved encoderens nullpunkt (ofte wrist_roll) | Vri leddet ca. en halv runde før du trykker ENTER i midtposisjon. Hjelper ikke det: kontakt infra-ansvarlig |
-| `Missing motor IDs` for **alle** motorene | Armen har ikke strøm, eller feil port | Sjekk strømadapteren og kjør `lerobot-find-port` |
+| `Missing motor IDs` for **alle** motorene | Armen har ikke strøm, eller feil port | Ta ut strømmen i 5 sekunder og sett den i igjen. Sjekk så at adapteren står i, og kjør `lerobot-find-port` |
 | `Mismatch between calibration values in the motor and the calibration file` | Feil id eller ny motor | Sjekk at id-en stemmer med stasjonen. Ellers kalibrer |
 | Ingen COM-port / `ttyACM` | Driver eller strøm mangler | Se seksjon 2 |
 | Kamera feiler ved oppstart | Feil indeks eller oppløsning, eller kameraet er i bruk | Kjør `lerobot-find-cameras opencv` på nytt |
