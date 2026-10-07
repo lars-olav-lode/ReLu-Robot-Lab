@@ -2,7 +2,7 @@
 
 Oppsett, kalibrering og skript for ReLu sine SO-101-stasjoner (leader + follower, LeRobot).
 
-Koden for LeRobot ligger i forken [LabReLUPhysucalHF](https://github.com/lars-olav-lode/LabReLUPhysucalHF) (basert på Hiwonder sin SO-ARM101-versjon). Dette repoet inneholder bare det som er spesifikt for laben vår.
+Vi bruker den offisielle [LeRobot](https://github.com/huggingface/lerobot) fra Hugging Face. Dette repoet inneholder bare det som er spesifikt for laben vår.
 
 ---
 
@@ -52,7 +52,7 @@ Kjør alt **direkte på maskinen**, ikke i VM eller WSL. USB-videresending til a
 
 ```bash
 # 1. Klon begge repoene
-git clone https://github.com/lars-olav-lode/LabReLUPhysucalHF.git
+git clone https://github.com/huggingface/lerobot.git
 git clone https://github.com/lars-olav-lode/ReLu-Robot-Lab.git
 
 # 2. Lag miljøet (Python 3.12 + ffmpeg)
@@ -60,12 +60,10 @@ cd ReLu-Robot-Lab
 conda env create -f environment.yml
 conda activate lerobot
 
-# 3. Installer LeRobot fra forken
-cd ../LabReLUPhysucalHF
+# 3. Installer LeRobot
+cd ../lerobot
 pip install -e ".[feetech]"
 ```
-
-> Sjekk `pyproject.toml` i forken om det finnes et `hiwonder`-extra. I så fall: `pip install -e ".[feetech,hiwonder]"`.
 
 > **Intel-Mac:** det har vært versjonskonflikt med `torchvision`. Si fra i Slack hvis du får installasjonsfeil.
 
