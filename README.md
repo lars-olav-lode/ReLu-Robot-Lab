@@ -62,7 +62,7 @@ conda activate lerobot
 
 # 3. Installer LeRobot
 cd ../lerobot
-pip install -e ".[feetech]"
+pip install -e ".[feetech,viz]"   # feetech = motorene, viz = Rerun-visning
 ```
 
 > **Intel-Mac:** det har vært versjonskonflikt med `torchvision`. Si fra i Slack hvis du får installasjonsfeil.
